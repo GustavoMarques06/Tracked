@@ -15,14 +15,14 @@ namespace Tracked.Infrastructure.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<T> Create(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             var GenericClass = await GetByIdAsync(id);
             if (GenericClass != null)
@@ -42,7 +42,7 @@ namespace Tracked.Infrastructure.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<T> Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
